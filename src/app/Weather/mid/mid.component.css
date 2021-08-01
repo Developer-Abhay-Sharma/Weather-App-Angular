@@ -1,0 +1,31 @@
+.mat-card{
+    text-align: center;
+    margin: auto;
+    width: fit-content;
+    background-color: #a0bcbd9e;
+}
+button{
+    margin-left: 20px;
+}
+.para1{
+    font-size: 25px;
+}
+.temp{
+    font-size: 20px;
+}
+.des{
+    font-size: 20px;
+    text-transform: capitalize;
+}
+
+footer{
+    background-color: black;
+    color: white;
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    width: 100%;
+    display: inline-block;
+    padding: 2px;
+    margin-left: -8px;
+}

@@ -1,0 +1,17 @@
+<div>
+    <mat-card>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Enter the city</mat-label>
+            <input matInput placeholder="Ex. Faridpur, IN" value="" #cityname>
+        </mat-form-field>
+        <button (click) = "inputcity(cityname.value)" mat-raised-button color="warn">Search</button>
+        <p *ngIf="isShown">{{error}}</p>
+        <p class="para1">Weather in {{this.data?.name}}, {{this.data?.sys.country}}</p>
+        <img src={{this.img}} alt="image">
+        <p class="temp">{{this.data?.main.temp}}°C</p>
+        <p class="des">{{this.des?.description}}</p>
+    </mat-card>
+</div>
+<footer>
+    Made By Abhay Sharma © 
+</footer>
