@@ -1,8 +1,7 @@
-.mat-card{
+.container{
     text-align: center;
     margin: auto;
     width: fit-content;
-    background-color: #a0bcbd9e;
 }
 button{
     margin-left: 20px;
@@ -28,4 +27,35 @@ footer{
     display: inline-block;
     padding: 2px;
     margin-left: -8px;
+}
+
+.hrsdata{
+    width: 50vw;
+    background-color: #ff000000;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #fcfcfc;
+    border-radius: 5px;
+}
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #f44336;
+    border-radius: 5px;
+}
+
+table{
+    border-radius: 5px;
+}
+
+td{
+    padding: 20px;
+    border-radius: 5px;
 }

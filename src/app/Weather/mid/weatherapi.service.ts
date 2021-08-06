@@ -19,6 +19,13 @@ export class WeatherapiService {
     );
   }
   
+
+  hoursdata(lat:any, lng:any){
+    let apikey2 = ""
+    let url = 'https://api.openweathermap.org/data/2.5/onecall?lat='+lat+'&lon='+lng+'&exclude=minutely,current,alerts&units=metric&appid='+apikey2
+    return this.http.get(url)
+  }
+
   handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.

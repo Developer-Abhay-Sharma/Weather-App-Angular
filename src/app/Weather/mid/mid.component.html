@@ -1,17 +1,35 @@
 <div>
-    <mat-card>
+    <div class="container">
         <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Enter the city</mat-label>
             <input matInput placeholder="Ex. Faridpur, IN" value="" #cityname>
         </mat-form-field>
-        <button (click) = "inputcity(cityname.value)" mat-raised-button color="warn">Search</button>
+        <button (click)="inputcity(cityname.value)" mat-raised-button color="warn">Search</button>
         <p *ngIf="isShown">{{error}}</p>
         <p class="para1">Weather in {{this.data?.name}}, {{this.data?.sys.country}}</p>
         <img src={{this.img}} alt="image">
         <p class="temp">{{this.data?.main.temp}}°C</p>
         <p class="des">{{this.des?.description}}</p>
-    </mat-card>
+        <div class="hrsdata">
+            <table>
+                <tr>
+                    <td *ngFor="let item of hourly; let i = index" [attr.data-index]="i">
+                        <!-- <div *ngIf = "time; else elseBlock">
+                            <p>{{time}}</p>
+                        </div>
+                        <ng-template #elseBlock>{{time+i}}</ng-template> -->
+                        <p>Next {{i+1}}hrs</p>
+                        <div *ngFor="let icons of item.weather">
+                            <img src="https://openweathermap.org/img/wn/{{icons.icon}}.png" alt="">
+                        </div>
+                        <p>{{item.temp}}°C</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+    </div>
 </div>
 <footer>
-    Made By Abhay Sharma © 
+    Made By Abhay Sharma ©
 </footer>
