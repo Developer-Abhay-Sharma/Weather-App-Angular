@@ -1,0 +1,9 @@
+<div *ngIf = "isLoadingFinish(); else notFinish">
+    <app-head></app-head>
+</div>
+<ng-template #notFinish>
+    <div class="main-body">
+        <p class="primary-heading">Welcome To The Weather App</p>
+        <div id="loading-line"></div>
+    </div>
+</ng-template> 

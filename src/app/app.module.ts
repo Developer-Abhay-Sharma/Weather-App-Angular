@@ -9,12 +9,14 @@ import { HttpClientModule } from '@angular/common/http'
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import { MainbodyComponent } from './mainbody/mainbody.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeadComponent,
-    MidComponent
+    MidComponent,
+    MainbodyComponent
   ],
   imports: [
     BrowserModule,

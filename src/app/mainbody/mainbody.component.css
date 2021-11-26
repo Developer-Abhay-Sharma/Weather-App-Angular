@@ -1,0 +1,32 @@
+.main-body{
+    display: flex;
+    background: #020406;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0px;
+    flex-direction: column;
+}
+.primary-heading{
+    display: block;
+    color: white;
+    margin: 0px;
+    font-size: 2rem;
+    position: relative;
+    animation: slowAppear 2s forwards;   
+}
+@keyframes slowAppear {
+    0%{bottom: -20px; opacity: 0;}
+    20%{opacity: 0;}
+    100%{bottom: 55px; opacity: 1;}
+}
+#loading-line{
+    border: 2px solid white;
+    border-bottom-style: none;
+    border-left-style: none; 
+    animation: changeLoader 3s forwards;  
+}
+@keyframes changeLoader{
+    from{width: 0%;}
+    to{width: 45%;}
+}

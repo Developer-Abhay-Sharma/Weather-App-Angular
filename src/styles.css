@@ -1,9 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
 body{
-    background: url(/assets/weatherbackgound.jpg)no-repeat center center/cover;
-    background-color: #48affe;
+  margin: 0;
+  padding: 0;
+  font-family: 'Bree Serif', serif;
 }
-/* html{
-    background-color: #48affe;
-} */
+html{
+   font-size: 62.5;
+}

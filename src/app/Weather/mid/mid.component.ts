@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WeatherapiService} from './weatherapi.service'
+import { WeatherapiService} from '../../_services/weatherapi.service'
 
 @Component({
   selector: 'app-mid',
