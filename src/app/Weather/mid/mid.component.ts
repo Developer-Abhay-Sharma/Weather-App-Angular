@@ -64,6 +64,20 @@ export class MidComponent  {
       })
     }, 500);
   }
+  getTime(i:number){
+    let sendNextHRSValue =  new Date().getHours() + i + 1
+    if (sendNextHRSValue >23) {
+      let next24_1 = sendNextHRSValue -24
+      if (next24_1 >23) {
+        let next24_2 = sendNextHRSValue - 48
+        return next24_2 
+      }
+      return next24_1
+    } else {
+      return sendNextHRSValue
+    }
+    // return sendNextHRSValue
+  }
   OnInit(){
     
   }

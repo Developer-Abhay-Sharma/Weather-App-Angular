@@ -18,11 +18,11 @@
                             <p>{{time}}</p>
                         </div>
                         <ng-template #elseBlock>{{time+i}}</ng-template> -->
-                        <p>Next {{i+1}}hrs</p>
+                        <p class="upcomingtime">{{getTime(i)}}:00hrs</p>
                         <div *ngFor="let icons of item.weather">
                             <img src="https://openweathermap.org/img/wn/{{icons.icon}}.png" alt="">
                         </div>
-                        <p>{{item.temp}}°C</p>
+                        <p class="upcomingtemp">{{item.temp}}°C</p>
                     </td>
                 </tr>
             </table>

@@ -7,13 +7,13 @@ button{
     margin-left: 20px;
 }
 .para1{
-    font-size: 25px;
+    font-size: 2rem;
 }
 .temp{
-    font-size: 20px;
+    font-size: 2rem;
 }
 .des{
-    font-size: 20px;
+    font-size: 2rem;
     text-transform: capitalize;
 }
 
@@ -58,4 +58,10 @@ table{
 td{
     padding: 20px;
     border-radius: 5px;
+}
+.upcomingtime{
+    font-size: 1.5rem;
+}
+.upcomingtemp{
+    font-size: 1.3rem;
 }
