@@ -18,6 +18,7 @@ export class MidComponent  {
   isShown:any
   hourly:any;
   daily:any;
+  day:any;
   constructor(private list:WeatherapiService){
     this.list.weatherData(this.cityname).subscribe((result) =>{
       // console.log("result",result)
@@ -34,7 +35,8 @@ export class MidComponent  {
         this.data2 = result2;
         this.hourly = this.data2.hourly
         this.daily = this.data2.daily
-        // console.log(this.hourly)
+        this.daily.splice(0,1)
+        console.log(this.hourly)
         // console.log(this.daily)
         // console.log(this.data2)
       })
@@ -60,12 +62,15 @@ export class MidComponent  {
       this.list.hoursdata(this.lat, this.lng).subscribe((result2)=>{
         this.data2 = result2;
         this.hourly = this.data2.hourly
+        this.daily = this.data2.daily
+        this.daily.splice(0,1)
         // console.log(this.data2)
       })
     }, 500);
   }
   getTime(i:number){
     let sendNextHRSValue =  new Date().getHours() + i + 1
+    this.getday(sendNextHRSValue)
     if (sendNextHRSValue >23) {
       let next24_1 = sendNextHRSValue -24
       if (next24_1 >23) {
@@ -76,7 +81,32 @@ export class MidComponent  {
     } else {
       return sendNextHRSValue
     }
-    // return sendNextHRSValue
+  }
+  getday(check:any){
+    let daynumber = new Date().getDay()
+    if (check > 23) {
+      daynumber +=1 
+    }
+    if (check > 46) {
+      daynumber+=1
+    }
+    if (daynumber == 0) {
+      return this.day = 'Sunday'
+    } else if (daynumber == 1) {
+      return this.day = 'Monday'
+    }else if (daynumber == 2) {
+      return this.day = 'Tuesday'
+    } else if (daynumber == 3) {
+      return this.day = 'Wednesday'
+    } else if (daynumber == 4) {
+      return this.day = 'Thrusday'
+    } else if (daynumber == 5) {
+      return this.day = 'Friday'
+    } else if (daynumber == 6) {
+      return this.day = 'Saturday'
+    } else {
+      return this.day = 'Error'
+    }
   }
   OnInit(){
     

@@ -10,26 +10,37 @@
         <img src={{this.img}} alt="image">
         <p class="temp">{{this.data?.main.temp}}°C</p>
         <p class="des">{{this.des?.description}}</p>
+        <p class="upcomingtime">Upcoming 7 Days</p>
         <div class="hrsdata">
-            <table>
-                <tr>
-                    <td *ngFor="let item of hourly; let i = index" [attr.data-index]="i">
-                        <!-- <div *ngIf = "time; else elseBlock">
-                            <p>{{time}}</p>
-                        </div>
-                        <ng-template #elseBlock>{{time+i}}</ng-template> -->
-                        <p class="upcomingtime">{{getTime(i)}}:00hrs</p>
+            <table class="hrsdata_day">
+                <tr> 
+                    <td *ngFor="let item of daily;">
+                        <!-- <p class="upcomingtime">{{getTime(i)}}:00</p> -->
+                        <!-- <p class="upcomingtime">{{day}}</p> -->
                         <div *ngFor="let icons of item.weather">
                             <img src="https://openweathermap.org/img/wn/{{icons.icon}}.png" alt="">
                         </div>
-                        <p class="upcomingtemp">{{item.temp}}°C</p>
+                        <p class="upcomingtemp">{{item.temp.max}}/{{item.temp.min}}°C</p>
                     </td>
                 </tr>
             </table>
         </div>
-        
+        <p class="upcomingtime">Upcoming 48 hours</p>
+        <div class="upcomingweather">
+        <table  class="hrsdatacoming">
+                <tr *ngFor="let item of hourly; let i = index" [attr.data-index]="i">
+                    <td class="upcomingtime">{{getTime(i)}}:00</td>
+                    <td class="upcomingtime">{{day}}</td>
+                    <td *ngFor="let icons of item.weather">
+                        <img src="https://openweathermap.org/img/wn/{{icons.icon}}.png" alt="">
+                    </td>
+                    <td class="upcomingtime">{{item.weather[0].description}}</td>
+                    <td class="upcomingtemp">{{item.temp}}°C</td>
+                </tr>
+        </table>
+        </div>
     </div>
 </div>
-<footer>
+<!-- <footer>
     Made By Abhay Sharma ©
-</footer>
+</footer> -->
