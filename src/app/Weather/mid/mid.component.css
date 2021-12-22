@@ -5,6 +5,8 @@
 }
 button{
     margin-left: 20px;
+    position: relative;
+    top: -5px;
 }
 .para1{
     font-size: 2rem;
@@ -15,6 +17,7 @@ button{
 .des{
     font-size: 2rem;
     text-transform: capitalize;
+    margin-bottom: 3rem;
 }
 
 footer{
@@ -26,6 +29,7 @@ footer{
     width: 100%;
     display: inline-block;
     padding: 2px;
+    padding-left: 10px;
     margin-left: -8px;
 }
 
@@ -70,6 +74,7 @@ table{
 
 td{
     padding: 20px;
+    padding-top: 10px;
     border-radius: 5px;
 }
 .upcomingtime{
@@ -87,4 +92,7 @@ td{
     overflow-y: auto;
     overflow-x: auto;
     width: 100vw;
+}
+.mat-form-field{
+    font-size: 1.3rem;
 }

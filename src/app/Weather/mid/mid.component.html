@@ -14,13 +14,13 @@
         <div class="hrsdata">
             <table class="hrsdata_day">
                 <tr> 
-                    <td *ngFor="let item of daily;">
-                        <!-- <p class="upcomingtime">{{getTime(i)}}:00</p> -->
-                        <!-- <p class="upcomingtime">{{day}}</p> -->
+                    <td *ngFor="let item of daily; index as i">
+                        <p class="upcomingtime">{{nextDays(i)}}</p>
                         <div *ngFor="let icons of item.weather">
                             <img src="https://openweathermap.org/img/wn/{{icons.icon}}.png" alt="">
                         </div>
-                        <p class="upcomingtemp">{{item.temp.max}}/{{item.temp.min}}°C</p>
+                        <p class="upcomingtime">{{item.weather[0].description}}</p>
+                        <p class="upcomingtemp">{{item.temp.max}}°/{{item.temp.min}}°</p>
                     </td>
                 </tr>
             </table>
@@ -41,6 +41,6 @@
         </div>
     </div>
 </div>
-<!-- <footer>
+<footer>
     Made By Abhay Sharma ©
-</footer> -->
+</footer>
