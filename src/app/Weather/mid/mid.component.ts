@@ -133,7 +133,7 @@ export class MidComponent  {
     if (daynumber > 6) {
       daynumber = daynumber - 7
     }
-    if (daynumber == 0) {
+    if (daynumber == 0 || daynumber == 7 ) {
       return this.day = 'Sunday'
     } else if (daynumber == 1) {
       return this.day = 'Monday'
