@@ -110,13 +110,15 @@ export class MidComponent  {
     if (check > 46) {
       daynumber+=1
     }
-    if (daynumber == 0) {
+    console.log(daynumber);
+    
+    if (daynumber == 0 || daynumber == 6) {
       return this.day = 'Sunday'
-    } else if (daynumber == 1) {
+    } else if (daynumber == 1 || daynumber == 7) {
       return this.day = 'Monday'
-    }else if (daynumber == 2) {
+    }else if (daynumber == 2 || daynumber == 8) {
       return this.day = 'Tuesday'
-    } else if (daynumber == 3) {
+    } else if (daynumber == 3 || daynumber == 9) {
       return this.day = 'Wednesday'
     } else if (daynumber == 4) {
       return this.day = 'Thrusday'
