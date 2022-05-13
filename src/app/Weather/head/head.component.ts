@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { SwPush } from '@angular/service-worker';
+import { ApplicationRef, Component, OnInit } from '@angular/core';
+import { SwPush, SwUpdate } from '@angular/service-worker';
+import { interval } from 'rxjs';
 import { NotificationService } from 'src/app/_services/notification.service';
 @Component({
   selector: 'app-head',
@@ -11,8 +12,12 @@ export class HeadComponent implements OnInit {
     'BD6BwoDPGRKyVhUiFw8IKvLyViWA-frxae8rdnW62_SPCSmTa-lmQLNUAXjLkTrgd82niCil63ag-JN0e8X3zrM';
   constructor(
     private swPush: SwPush,
-    private notificationService: NotificationService
-  ) {}
+    private swUpdate:SwUpdate,
+    private notificationService: NotificationService,
+    private appRef:ApplicationRef
+  ) {
+    this.checkUpdate();
+  }
 
   ngOnInit(): void {
     this.pushSubscription();
@@ -21,6 +26,7 @@ export class HeadComponent implements OnInit {
       ({action, notification}) =>{
         window.open(notification.data.url)
       })
+      this.updateClient();
   }
 
   pushSubscription() {
@@ -37,5 +43,33 @@ export class HeadComponent implements OnInit {
       )
     })
     .catch((err) => console.log(err));
+  }
+
+  updateClient(){
+    if (!this.swUpdate.isEnabled) {
+      console.log("not enabled");
+      return;
+    } 
+    this.swUpdate.available.subscribe((event) => {
+      console.log(`current`, event.current, `available `, event.available);
+      if (confirm('update available for the app please conform')) {
+        this.swUpdate.activateUpdate().then(() => location.reload());
+      }
+    })
+    this.swUpdate.activated.subscribe((event) => {
+      console.log(`current`, event.previous, `available `, event.current);
+    });
+  }
+
+  checkUpdate() {
+    this.appRef.isStable.subscribe((isStable) => {
+      if (isStable) {
+        const timeInterval = interval(8 * 60 * 60 * 1000);
+        timeInterval.subscribe(() => {
+          this.swUpdate.checkForUpdate().then(() => console.log('checked'));
+          console.log('update checked');
+        });
+      }
+    });
   }
 }
