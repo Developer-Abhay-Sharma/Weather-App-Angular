@@ -2,6 +2,7 @@ import { ApplicationRef, Component, OnInit } from '@angular/core';
 import { SwPush, SwUpdate } from '@angular/service-worker';
 import { interval } from 'rxjs';
 import { NotificationService } from 'src/app/_services/notification.service';
+import { WeatherapiService } from 'src/app/_services/weatherapi.service';
 @Component({
   selector: 'app-head',
   templateUrl: './head.component.html',
@@ -14,7 +15,7 @@ export class HeadComponent implements OnInit {
     private swPush: SwPush,
     private swUpdate: SwUpdate,
     private notificationService: NotificationService,
-    private appRef: ApplicationRef
+    private appRef: ApplicationRef,
   ) {
     this.checkUpdate();
   }
@@ -25,6 +26,7 @@ export class HeadComponent implements OnInit {
       window.open(notification.data.url);
     });
     this.updateClient();
+  
   }
 
   pushSubscription() {
@@ -32,7 +34,6 @@ export class HeadComponent implements OnInit {
       console.log('Notification is not enabled or blocked??');
       return;
     }
-    // console.log(this.publickey);
     this.swPush.unsubscribe().then((data) => {
       console.log(data);
       console.log('unsubscribe');
@@ -87,4 +88,6 @@ export class HeadComponent implements OnInit {
       }
     });
   }
+
+  
 }

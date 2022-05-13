@@ -10,10 +10,8 @@ export class WeatherapiService {
   constructor(private http: HttpClient) { }
 
   weatherData(cityname:any){
-    let city = 'Bareilly'
-    city = cityname
     let apikey = "f218098b6f1613e228eecfaac361074d"
-    let url = 'https://api.openweathermap.org/data/2.5/weather?q='+city+'&units=metric&appid='+apikey;
+    let url = 'https://api.openweathermap.org/data/2.5/weather?q='+cityname+'&units=metric&appid='+apikey;
     return this.http.get(url).pipe(
       catchError(this.handleError)
     );
@@ -34,5 +32,9 @@ export class WeatherapiService {
         return throwError(
           'City Not Found');
     }
+  }
+  getCityNameFromLatAndLng(lat:number, lng:number){
+    let url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=en`
+    return this.http.get<any>(url)
   }
 }
