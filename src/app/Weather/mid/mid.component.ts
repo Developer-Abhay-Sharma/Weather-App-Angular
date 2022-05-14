@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NotificationService } from 'src/app/_services/notification.service';
 import { WeatherapiService } from '../../_services/weatherapi.service';
 
 @Component({
@@ -19,7 +20,10 @@ export class MidComponent {
   hourly: any;
   daily: any;
   day: any;
-  constructor(private list: WeatherapiService) {}
+  constructor(
+    private list: WeatherapiService,
+    private notificationService:NotificationService
+    ) {}
 
   ngOnInit() {
     this.getLocation();
@@ -32,10 +36,9 @@ export class MidComponent {
       (result) => {
         console.log("result",result)
         this.data = result;
-        // this.lat = this.data?.coord.lat;
-        // this.lng = this.data?.coord.lon;
-        // this.des = this.data?.weather[0];
-        // console.log(this.des)
+        this.notificationService.sendNotificationWeather(result).subscribe(res => {
+          console.log(res);
+        })
         this.img =
           'https://openweathermap.org/img/wn/' + this.data?.weather[0].icon + '.png';
       },
