@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NotificationService } from 'src/app/_services/notification.service';
 import { WeatherapiService } from '../../_services/weatherapi.service';
 
 @Component({
@@ -19,7 +20,10 @@ export class MidComponent {
   hourly: any;
   daily: any;
   day: any;
-  constructor(private list: WeatherapiService) {}
+  constructor(
+    private list: WeatherapiService,
+    private notificationService:NotificationService
+    ) {}
 
   ngOnInit() {
     this.getLocation();
@@ -30,14 +34,13 @@ export class MidComponent {
     this.isShown = false;
     this.list.weatherData(cityname).subscribe(
       (result) => {
-        // console.log("result",result)
+        console.log("result",result)
         this.data = result;
-        this.lat = this.data?.coord.lat;
-        this.lng = this.data?.coord.lon;
-        this.des = this.data?.weather[0];
-        // console.log(this.des)
+        this.notificationService.sendNotificationWeather(result).subscribe(res => {
+          console.log(res);
+        })
         this.img =
-          'https://openweathermap.org/img/wn/' + this.des?.icon + '.png';
+          'https://openweathermap.org/img/wn/' + this.data?.weather[0].icon + '.png';
       },
       (error) => {
         // console.log(error)
@@ -61,7 +64,7 @@ export class MidComponent {
           let temp = parseInt(this.hourly[i].temp);
           this.hourly[i].temp = temp;
         }
-        // console.log(this.data2)
+        console.log(this.data2)
       });
     }, 500);
   }
@@ -89,13 +92,13 @@ export class MidComponent {
     }
     // console.log(daynumber);
 
-    if (daynumber == 0 || daynumber == 6) {
+    if (daynumber == 0 || daynumber == 7) {
       return (this.day = 'Sunday');
-    } else if (daynumber == 1 || daynumber == 7) {
+    } else if (daynumber == 1 || daynumber == 8) {
       return (this.day = 'Monday');
-    } else if (daynumber == 2 || daynumber == 8) {
+    } else if (daynumber == 2 || daynumber == 9) {
       return (this.day = 'Tuesday');
-    } else if (daynumber == 3 || daynumber == 9) {
+    } else if (daynumber == 3 || daynumber == 10) {
       return (this.day = 'Wednesday');
     } else if (daynumber == 4) {
       return (this.day = 'Thrusday');
@@ -108,7 +111,7 @@ export class MidComponent {
     }
   }
   nextDays(i: number) {
-    let daynumber = new Date().getDay() + i + 1;
+    let daynumber = new Date().getDay() + i;
     if (daynumber > 6) {
       daynumber = daynumber - 7;
     }
