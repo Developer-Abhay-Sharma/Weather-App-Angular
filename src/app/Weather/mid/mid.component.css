@@ -1,7 +1,7 @@
 .container{
     text-align: center;
     margin: auto;
-    width: fit-content;
+    width: 50%;
 }
 button{
     margin-left: 20px;
@@ -9,15 +9,16 @@ button{
     top: -5px;
 }
 .para1{
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 .temp{
-    font-size: 2rem;
+    font-size: 2.7rem;
+    margin: 0;
 }
 .des{
-    font-size: 2rem;
+    font-size: 2.2rem;
     text-transform: capitalize;
-    margin-bottom: 3rem;
+    margin:0;
 }
 
 footer{
@@ -34,17 +35,21 @@ footer{
 }
 
 .hrsdata{
-    width: 80vw;
     background-color: #ff000000;
     overflow-x: auto;
     overflow-y: hidden;
-    margin: 3rem;
     margin-bottom: 5rem;
-    margin-left: 54px;
+    width: 100%;
 }
-@media only screen and (max-width: 425px){
-	.hrsdata{
-        margin-left: 3rem;
+.feels_like{
+    font-size: 1.5rem;
+}
+.wind{
+    font-size: 1.5rem;
+}
+@media only screen and (max-width: 1440px){
+    .container{
+        width: 100%;
     }
 }
 .hrsdata_day{
@@ -91,7 +96,7 @@ td{
     height: 100vh;
     overflow-y: auto;
     overflow-x: auto;
-    width: 100vw;
+    width: 100%;
 }
 .mat-form-field{
     font-size: 1.3rem;
