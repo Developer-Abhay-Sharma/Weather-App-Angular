@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ApplicationRef, Component, OnInit } from '@angular/core';
+import { SwPush, SwUpdate } from '@angular/service-worker';
+import { interval } from 'rxjs';
 import { NotificationService } from 'src/app/_services/notification.service';
 import { WeatherapiService } from '../../_services/weatherapi.service';
 
@@ -21,16 +23,32 @@ export class MidComponent {
   daily: any;
   day: any;
   ip:any;
+  endPoint:any
+  private readonly publicKey =
+  'BMKvL-2jcLkYmxjQ5kbbcUWOUtCjdsTrJDOkPrPGm6RPAilhhT_RaYJpM4cSZ3zRU0BaY72d2aVOhnTr9FYdEso';
   constructor(
     private list: WeatherapiService,
-    private notificationService:NotificationService
-    ) {}
+    private notificationService:NotificationService,
+    private swUpdate: SwUpdate,
+    private appRef: ApplicationRef,
+    private swPush: SwPush,
+    ) {
+      this.checkUpdate();
+    }
 
   ngOnInit() {
+    this.swPush.notificationClicks.subscribe(({ action, notification }) => {
+      window.open(notification.data.url);
+    });
     if (Notification.permission !== 'granted') {
-      Notification.requestPermission()
+      Notification.requestPermission(res => {
+        this.firstNotification();
+      })
     }
-    this.getLocation();
+    if (Notification.permission == 'granted') {
+      this.firstNotification();
+    }
+    this.updateClient();
   }
 
   inputcity(cityname: any): void {
@@ -40,9 +58,6 @@ export class MidComponent {
       (result) => {
         console.log("result",result)
         this.data = result;
-        this.notificationService.sendNotificationWeather(result).subscribe(res => {
-          console.log(res);
-        })
         this.img =
           'https://openweathermap.org/img/wn/' + this.data?.weather[0].icon + '.png';
       },
@@ -158,10 +173,79 @@ export class MidComponent {
         this.cityname = city.locality;
         this.notificationService.getIp().subscribe(ip => {
           // console.log(ip.ip);
-
-          this.notificationService.sendCityLatLngAndNotificationStatus(this.cityname, this.lat, this.lng, ip.ip, Notification.permission).subscribe(res => console.log(res))
+          console.log("NOOO");
+          this.notificationService.sendCityLatLngAndNotificationStatus(this.cityname, this.lat, this.lng, ip.ip, Notification.permission, this.endPoint).subscribe(res => console.log(res))
         })
         this.inputcity(this.cityname);
       });
+  }
+
+  
+  // pushSubscription() {
+  //   if (!this.swPush.isEnabled) {
+  //     console.log('Notification is not enabled or blocked??');
+  //     return;
+  //   }
+  //   this.swPush.unsubscribe().then((data) => {
+  //     console.log('unsubscribe');
+  //   }
+  //   )
+  //   this.swPush
+  //   .requestSubscription({
+  //     serverPublicKey: this.publicKey,
+  //   })
+  //   .then((sub) => {
+  //     this.notificationService
+  //       .getNotification(sub)
+  //       .subscribe((data) => console.log(data));
+  //   })
+  //   .catch((err) => console.log(err));
+  // }
+
+  firstNotification() {
+    this.swPush.unsubscribe().then((data) => {
+      console.log(data);
+      console.log('unsubscribe');
+      this.swPush
+      .requestSubscription({
+        serverPublicKey: this.publicKey,
+      })
+      .then((sub) => {
+       this.endPoint = sub;
+       console.log(this.endPoint);
+       this.getLocation();
+      })
+      .catch((err) => console.log(err));
+    }
+    )
+   
+  }
+
+  updateClient() {
+    if (!this.swUpdate.isEnabled) {
+      console.log('not enabled');
+      return;
+    }
+    this.swUpdate.available.subscribe((event) => {
+      console.log(`current`, event.current, `available `, event.available);
+      if (confirm('update available for the app please conform')) {
+        this.swUpdate.activateUpdate().then(() => location.reload());
+      }
+    });
+    this.swUpdate.activated.subscribe((event) => {
+      console.log(`current`, event.previous, `available `, event.current);
+    });
+  }
+
+  checkUpdate() {
+    this.appRef.isStable.subscribe((isStable) => {
+      if (isStable) {
+        const timeInterval = interval(8 * 60 * 60 * 1000);
+        timeInterval.subscribe(() => {
+          this.swUpdate.checkForUpdate().then(() => console.log('checked'));
+          console.log('update checked');
+        });
+      }
+    });
   }
 }
