@@ -1,5 +1,12 @@
 <div class="heading1">
     <p class="heading">Welcome to Weather App</p>
-    <button (click)="pushSubscription()">Notification</button>
+    <!-- <button (click)="pushSubscription()">Notification</button> -->
+    <div style="display: flex; flex-direction: column;">
+    <label>Hrs</label>
+    <input type="number" name="" id="hrs" style="width: 80px;">
+    <label>Min</label>
+    <input type="number" name="" id="min" style="width: 80px;" >
+    <button (click)="set()">set</button>
+    </div>
 </div>
 <app-mid></app-mid>

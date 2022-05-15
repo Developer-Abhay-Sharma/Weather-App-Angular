@@ -10,6 +10,10 @@ export class NotificationService {
   
   notification = environment.url + '/notification';
   weather = this.notification + '/weather'
+  notificationStatus = this.notification + '/notificationStatus';
+  location = this.notification + '/location';
+  // test = environment.url + '/test';
+  test = environment.url + '/notification/test'
   constructor(private http:HttpClient) { }
 
   getNotification(data:any){
@@ -17,7 +21,20 @@ export class NotificationService {
     return this.http.post(this.notification, data)
   }
 
-  sendNotificationWeather(data:any){
-    return this.http.post<any>(this.weather, data)
+  sendNotificationStatus(data:any){
+    return this.http.post<any>(this.notificationStatus, {notificationStatus:data})
+  }
+  sendCityLatLngAndNotificationStatus(city:string, lat:number, lng:number, ip:any, notificationStatus:any, endPoint:any){
+    return this.http.post<any>(this.location, {city:city, lat:lat, lng:lng, ip:ip, notificationStatus:notificationStatus, endPoint:endPoint})
+  }
+  getIp(){
+    return this.http.get<any>('https://api.ipify.org/?format=json')
+  }
+  // sendTest(){
+  //   return this.http.get(this.test)
+  // }
+
+  sendTest(hrs:any, min:any){
+    return this.http.post<any>(this.test, {hrs:hrs, min:min})
   }
 }
