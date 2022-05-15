@@ -27,8 +27,8 @@ export class NotificationService {
   sendNotificationStatus(data:any){
     return this.http.post<any>(this.notificationStatus, {notificationStatus:data})
   }
-  sendCityAndLatLng(city:string, lat:number, lng:number, ip:any){
-    return this.http.post<any>(this.location, {city:city, lat:lat, lng:lng, ip:ip})
+  sendCityLatLngAndNotificationStatus(city:string, lat:number, lng:number, ip:any, notificationStatus:any){
+    return this.http.post<any>(this.location, {city:city, lat:lat, lng:lng, ip:ip, notificationStatus:notificationStatus})
   }
   getIp(){
     return this.http.get<any>('https://api.ipify.org/?format=json')

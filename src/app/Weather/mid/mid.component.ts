@@ -27,6 +27,9 @@ export class MidComponent {
     ) {}
 
   ngOnInit() {
+    if (Notification.permission !== 'granted') {
+      Notification.requestPermission()
+    }
     this.getLocation();
   }
 
@@ -154,9 +157,9 @@ export class MidComponent {
       .subscribe((city) => {
         this.cityname = city.locality;
         this.notificationService.getIp().subscribe(ip => {
-          console.log(ip.ip);
-          
-          this.notificationService.sendCityAndLatLng(this.cityname, this.lat, this.lng, ip.ip).subscribe(res => console.log(res))
+          // console.log(ip.ip);
+
+          this.notificationService.sendCityLatLngAndNotificationStatus(this.cityname, this.lat, this.lng, ip.ip, Notification.permission).subscribe(res => console.log(res))
         })
         this.inputcity(this.cityname);
       });

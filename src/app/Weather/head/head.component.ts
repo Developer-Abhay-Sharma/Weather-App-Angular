@@ -27,12 +27,6 @@ export class HeadComponent implements OnInit {
       window.open(notification.data.url);
     });
     this.updateClient();
-    if (Notification.permission !== 'granted') {
-      Notification.requestPermission(result => {
-        this.notificationService.sendNotificationStatus(result).subscribe(res => console.log(res))
-      });
-    }
-   
   }
 
   pushSubscription() {
