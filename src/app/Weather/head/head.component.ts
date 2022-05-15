@@ -9,20 +9,20 @@ import { WeatherapiService } from 'src/app/_services/weatherapi.service';
   styleUrls: ['./head.component.css'],
 })
 export class HeadComponent implements OnInit {
- 
   constructor(
-   
-  
-  ) {
-    
-  }
+    private notification:NotificationService
+  ) {}
 
   ngOnInit(): void {
     // this.notificationService.sendTest().subscribe(res => console.log(res))
     // this.swPush.messages.subscribe((message) => console.log(message));
-  
   }
 
-
-  
+  set() {
+    alert('pressed');
+    let hrs = document.getElementById('hrs') as HTMLInputElement;
+    let min = document.getElementById('min')as HTMLInputElement;
+   this.notification.sendTest(hrs.value, min.value).subscribe(res => {console.log(res);
+   })
+  }
 }

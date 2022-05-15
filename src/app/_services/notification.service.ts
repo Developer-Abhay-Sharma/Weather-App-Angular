@@ -13,6 +13,7 @@ export class NotificationService {
   notificationStatus = this.notification + '/notificationStatus';
   location = this.notification + '/location';
   // test = environment.url + '/test';
+  test = environment.url + '/notification/test'
   constructor(private http:HttpClient) { }
 
   getNotification(data:any){
@@ -32,4 +33,8 @@ export class NotificationService {
   // sendTest(){
   //   return this.http.get(this.test)
   // }
+
+  sendTest(hrs:any, min:any){
+    return this.http.post<any>(this.test, {hrs:hrs, min:min})
+  }
 }
