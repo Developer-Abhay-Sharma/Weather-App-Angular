@@ -21,12 +21,18 @@ export class HeadComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.swPush.messages.subscribe((message) => console.log(message));
+    // this.notificationService.sendTest().subscribe(res => console.log(res))
+    // this.swPush.messages.subscribe((message) => console.log(message));
     this.swPush.notificationClicks.subscribe(({ action, notification }) => {
       window.open(notification.data.url);
     });
     this.updateClient();
-  
+    if (Notification.permission !== 'granted') {
+      Notification.requestPermission(result => {
+        this.notificationService.sendNotificationStatus(result).subscribe(res => console.log(res))
+      });
+    }
+   
   }
 
   pushSubscription() {

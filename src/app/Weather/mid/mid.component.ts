@@ -20,6 +20,7 @@ export class MidComponent {
   hourly: any;
   daily: any;
   day: any;
+  ip:any;
   constructor(
     private list: WeatherapiService,
     private notificationService:NotificationService
@@ -30,7 +31,7 @@ export class MidComponent {
   }
 
   inputcity(cityname: any): void {
-    // console.log(cityname)
+    console.log(cityname)
     this.isShown = false;
     this.list.weatherData(cityname).subscribe(
       (result) => {
@@ -136,12 +137,12 @@ export class MidComponent {
 
   getLocation(): void {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
+      navigator.geolocation.getCurrentPosition((position,) => {
         this.lng = position.coords.longitude;
         this.lat = position.coords.latitude;
         this.callApiForCityName(this.lng, this.lat);
-        // console.log(this.lng);
-        // console.log(this.lat);
+        console.log(this.lng);
+        console.log(this.lat);
       });
     } else {
       console.log('No support for geolocation');
@@ -152,6 +153,11 @@ export class MidComponent {
       .getCityNameFromLatAndLng(Latitude, Longitude)
       .subscribe((city) => {
         this.cityname = city.locality;
+        this.notificationService.getIp().subscribe(ip => {
+          console.log(ip.ip);
+          
+          this.notificationService.sendCityAndLatLng(this.cityname, this.lat, this.lng, ip.ip).subscribe(res => console.log(res))
+        })
         this.inputcity(this.cityname);
       });
   }
