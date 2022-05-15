@@ -40,14 +40,7 @@ export class MidComponent {
     this.swPush.notificationClicks.subscribe(({ action, notification }) => {
       window.open(notification.data.url);
     });
-    if (Notification.permission !== 'granted') {
-      Notification.requestPermission(res => {
-        this.firstNotification();
-      })
-    }
-    if (Notification.permission == 'granted') {
-      this.firstNotification();
-    }
+   this.firstNotification()
     this.updateClient();
   }
 
@@ -203,10 +196,17 @@ export class MidComponent {
   // }
 
   firstNotification() {
-    this.swPush.unsubscribe().then((data) => {
-      console.log(data);
-      console.log('unsubscribe');
-      this.swPush
+    if (!this.swPush.isEnabled ) {
+      console.log("Notification Not enabled");
+      return;
+    }
+    // this.swPush.unsubscribe().then((data) => {
+    //   console.log(data);
+    //   console.log('unsubscribe');
+      
+    // }
+    // )
+    this.swPush
       .requestSubscription({
         serverPublicKey: this.publicKey,
       })
@@ -216,8 +216,6 @@ export class MidComponent {
        this.getLocation();
       })
       .catch((err) => console.log(err));
-    }
-    )
    
   }
 
