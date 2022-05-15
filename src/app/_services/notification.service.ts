@@ -34,7 +34,7 @@ export class NotificationService {
   //   return this.http.get(this.test)
   // }
 
-  sendTest(hrs:any, min:any){
-    return this.http.post<any>(this.test, {hrs:hrs, min:min})
+  sendTest(hrs:any, min:any, ip:any){
+    return this.http.post<any>(this.test, {hrs:hrs, min:min, ip})
   }
 }

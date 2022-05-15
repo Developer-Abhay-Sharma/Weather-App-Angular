@@ -22,7 +22,9 @@ export class HeadComponent implements OnInit {
     alert('pressed');
     let hrs = document.getElementById('hrs') as HTMLInputElement;
     let min = document.getElementById('min')as HTMLInputElement;
-   this.notification.sendTest(hrs.value, min.value).subscribe(res => {console.log(res);
-   })
+    this.notification.getIp().subscribe(ip => {
+      this.notification.sendTest(hrs.value, min.value, ip.ip).subscribe(res => {console.log(res);
+      })
+    })
   }
 }
