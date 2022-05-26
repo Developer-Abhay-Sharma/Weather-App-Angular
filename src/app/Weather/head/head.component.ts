@@ -14,6 +14,7 @@ export class HeadComponent implements OnInit {
   ngOnInit(): void {
     // this.notificationService.sendTest().subscribe(res => console.log(res))
     // this.swPush.messages.subscribe((message) => console.log(message));
+    this.set()
   }
 
   set() {
