@@ -22,6 +22,8 @@ export class HeadComponent implements OnInit {
     // let hrs = document.getElementById('hrs') as HTMLInputElement;
     // let min = document.getElementById('min') as HTMLInputElement;
     // console.log(hrs.value);
+    console.log("ll");
+    
     // console.log(typeof min.value);
     let date = new Date();
     let now_utc = date.toUTCString();
