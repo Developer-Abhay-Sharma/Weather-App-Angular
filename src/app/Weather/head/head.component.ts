@@ -29,10 +29,10 @@ export class HeadComponent implements OnInit {
     let new_hrs = raw_time.slice(0, 2);
     let new_min = raw_time.slice(3, 5);
     // console.log(raw_time);
-    // console.log(new_hrs);
-    // console.log(new_min);
-    let parse_min = JSON.parse(new_min.replace(/ 0+(?![\. }])/g, ' '))
-    let parse_hrs = JSON.parse(new_hrs.replace(/ 0+(?![\. }])/g, ' '))
+    console.log(new_hrs);
+    console.log(new_min);
+    let parse_min = parseInt(new_min)
+    let parse_hrs = parseInt(new_hrs)
     console.log(parse_min);
     console.log(parse_hrs)
     this.notification.getIp().subscribe((ip) => {
