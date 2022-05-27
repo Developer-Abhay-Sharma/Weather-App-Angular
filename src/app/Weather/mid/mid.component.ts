@@ -163,7 +163,7 @@ export class MidComponent {
     this.list
       .getCityNameFromLatAndLng(Latitude, Longitude)
       .subscribe((city) => {
-        this.cityname = city.locality;
+        this.cityname = city.localityInfo.administrative[3].name;
         this.notificationService.getIp().subscribe(ip => {
           // console.log(ip.ip);
           console.log("NOOO");
