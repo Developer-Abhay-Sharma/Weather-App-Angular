@@ -29,7 +29,7 @@ export class MidComponent {
   constructor(
     private list: WeatherapiService,
     private notificationService:NotificationService,
-    private swUpdate: SwUpdate,
+    public swUpdate: SwUpdate,
     private appRef: ApplicationRef,
     private swPush: SwPush,
     ) {
@@ -95,7 +95,7 @@ export class MidComponent {
     }
   }
   getday(check: any) {
-    let daynumber = new Date().getDay();
+    let daynumber = new Date().getDay() ;
     if (check > 23) {
       daynumber += 1;
     }
